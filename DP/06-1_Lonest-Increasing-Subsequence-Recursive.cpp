@@ -4,14 +4,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int solve(int a[], int n, vector<int> v)
+int solve(int a[], int n, int prev, int size)
 {
     if(n == 0)
-        return v.size();
-    int temp = solve(a, n - 1, v);
-    if(v.empty() || *v.rbegin() < a[n - 1])
-        v.push_back(a[n - 1]);
-        temp = max(temp, solve(a, n - 1, v));
+        return size;
+    int temp = solve(a, n - 1, prev, size);
+    if(prev < a[n - 1])
+        temp = max(temp, solve(a, n - 1, a[n - 1], size + 1));
     return temp;
 }
 
@@ -22,7 +21,7 @@ int main()
 
     vector<int> v;
 
-    cout << solve(a, n, v);
+    cout << solve(a, n, 0, 0) << "\n";
 
     return 0;
 }
