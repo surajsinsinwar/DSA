@@ -5,16 +5,16 @@ int memo[1001][1001];
 
 int solve(int a[], int n, int sum)
 {
-    if(sum == 0)
+    if (sum == 0)
         memo[sum][n] = 1;
-    if(n == 0)
+    if (n == 0)
         memo[sum][n] = 0;
 
-    if(memo[sum][n] == -1)
+    if (memo[sum][n] == -1)
     {
         memo[sum][n] = solve(a, n - 1, sum);
 
-        if(a[n - 1] <= sum)
+        if (a[n - 1] <= sum)
             memo[sum][n] += solve(a, n, sum - a[n - 1]);
     }
     return memo[sum][n];

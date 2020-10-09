@@ -6,10 +6,10 @@ using namespace std;
 
 int solve(int a[], int n, int prev, int size)
 {
-    if(n == 0)
+    if (n == 0)
         return size;
     int temp = solve(a, n - 1, prev, size);
-    if(prev < a[n - 1])
+    if (prev < a[n - 1])
         temp = max(temp, solve(a, n - 1, a[n - 1], size + 1));
     return temp;
 }
