@@ -3,11 +3,11 @@ using namespace std;
 
 void nextGreatestElement(vector<int> v, int n)
 {
-	stack<int> st;
+    stack<int> st;
 
-    for(int i = 0; i <n ; i++)
+    for (int i = 0; i < n ; i++)
     {
-        while(!st.empty() && st.top() <= v[i])
+        while (!st.empty() && st.top() <= v[i])
         {
             st.pop();
         }
@@ -18,11 +18,11 @@ void nextGreatestElement(vector<int> v, int n)
 
 int main()
 {
-	int n;
+    int n;
     scanf("%d", &n);
 
     vector<int> v(n);
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         scanf("%d", &v[i]);
     }
