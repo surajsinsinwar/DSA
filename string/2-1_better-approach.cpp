@@ -1,1 +1,0 @@
-2 - 1_better - approach.cpp

@@ -3,20 +3,20 @@ using namespace std;
 
 int32_t main()
 {
-	int n, span;
+    int n, span;
     scanf("%d", &n);
 
     vector<int> v(n);
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         scanf("%d", &v[i]);
     }
 
     stack<int> st;
 
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        while(!st.empty() && v[st.top()] <= v[i])
+        while (!st.empty() && v[st.top()] <= v[i])
         {
             st.pop();
         }
