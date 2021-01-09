@@ -1,50 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void solve(string txt, string pat) {
+bool solve(string txt, string pat) {
 	int n = txt.length();
 	int m = pat.length();
 
-	int h = 0, temp = 0;
-	int d = 250, q = 11;
+	int d = 31;
+	int mod = 1e9 + 9;
 
-	bool flag;
+	vector<long long> p_pow(n);
+	p_pow[0] = 1;
 
+	for (int i = 1; i < n; i++) {
+		p_pow[i] = (p_pow[i - 1] * d) % mod;
+	}
+
+	vector<long long> h(n + 1);
+	h[0] = 0;
+	for (int i = 0; i < n; i++) {
+		h[i + 1] = (h[i] + txt[i] * p_pow[i]) % mod;
+	}
+
+	long long h_s = 0;
 	for (int i = 0; i < m; i++) {
-		temp = ((d * temp + txt[i]) % q);
-		h = ((d * h + pat[i]) % q);
+		h_s = (h_s + pat[i] * p_pow[i]) % mod;
 	}
 
-	int mul = 1;
-	for (int i = 1; i < m; i++) {
-		mul = (mul * d) % q;
+	for (int i = 0; i + m - 1 < n; i++) {
+		long long cur = (h[i + m] + mod - h[i]) % mod;
+		if (cur == h_s * p_pow[i] % mod) {
+			return 1;
+		}
 	}
 
-	for (int i = 0; i < n - m + 1; i++) {
-		if (temp == h) {
-			flag = 1;
-			for (int j = 0; j < m; j++) {
-				if (txt[i + j] != pat[j]) {
-					flag = 0;
-					break;
-				}
-			}
-			if (flag)
-				cout << i << " ";
-		}
-		if (i < n - m) {
-			temp = (((d * (temp - (txt[i] * mul))) + txt[i + m]) % q);
-			if (temp < 0)
-				temp += q;
-		}
-	}
-	return;
+	return 0;
 }
 
 int main() {
 	string txt = "GEEKS FOR GEEKS"; string pat = "GEEK";
-	cout << "All index numbers where pattern found:" << " ";
-	solve(txt, pat);
+	cout << solve(txt, pat);
 
 	return 0;
 }
