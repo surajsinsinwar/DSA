@@ -37,6 +37,18 @@ node* solve(int in[], int pre[], int s, int e) {
 	return root;
 }
 
+void inorder(node *root) {
+	if (root == NULL) {
+		return;
+	}
+
+	solve(root -> left);
+	cout << root -> data << " ";
+	solve(root -> right);
+
+	return;
+}
+
 int main() {
 
 	int in[] = {40, 20, 50, 10, 30, 80, 70};
