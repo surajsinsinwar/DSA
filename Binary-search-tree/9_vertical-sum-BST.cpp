@@ -23,32 +23,19 @@ void print(node* root) {
 	return;
 }
 
-void solve(node* root) {
-	vector<int> v;
-	map<int, vector<int>> mp;
 
-	queue<pair<Node*, int>> q;
-	q.push({root, 0});
-	while (q.empty() == false) {
-		auto p = q.front();
-		Node *curr = p.first;
-		int hd = p.second;
-		mp[hd].push_back(curr->data);
-		q.pop();
-		if (curr->left != NULL)
-			q.push({curr->left, hd - 1});
-		if (curr->right != NULL)
-			q.push({curr->right, hd + 1});
+void solve(node* root, unordered_map<int, int> &m, int n) {
+	if (root == NULL) {
+		return;
 	}
-	for (auto x : mp) {
-		for (int y : x.second) {
-			cout << y << " ";
-		}
-		cout << "\n";
-	}
+
+	solve(root -> left, m, n - 1);
+	m[n] += root -> data;
+	solve(root -> right, m, n + 1);
 
 	return;
 }
+
 
 int main() {
 
@@ -65,7 +52,17 @@ int main() {
 	root->right->left = new node(70);
 	root->right->right = new node(90);
 
-	solve(root);
+	unordered_map<int, int> m;
+	cout << "y";
+
+
+	solve(root, m, 0);
+
+	cout << m.size();
+
+	for (auto i : m) {
+		cout << i.second << " ";
+	}
 
 	return 0;
 }
